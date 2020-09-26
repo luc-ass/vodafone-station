@@ -1,5 +1,5 @@
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const pkg = require('./package.json');
 
 let libraryName = pkg.name;
@@ -19,6 +19,10 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js']
   },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
   module: {
     rules: [
       {
@@ -30,11 +34,7 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new UglifyJsPlugin({
-      sourceMap: true
-    })
-  ],
+  plugins: [new TerserPlugin()],
   target: 'node',
   stats: {
     colors: true
