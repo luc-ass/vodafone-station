@@ -6,9 +6,9 @@ const pass = process.env.STATION_PWD;
     try {
         const vodafoneBox = new VodafoneBox('192.168.0.1');
         await vodafoneBox.login('admin', pass);
-        const calls = await vodafoneBox.getCallHistory();
+        const result = await vodafoneBox.restart();
         await vodafoneBox.logout();
-        console.log(calls);
+        console.log(result);
     } catch (err) {
         console.log(err);
     }
